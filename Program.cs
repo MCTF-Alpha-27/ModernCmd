@@ -73,6 +73,10 @@ namespace ModernCmd
                                 MessageBox.Show("已禁用此插件，重启后生效", "需要重启",
                                     MessageBoxButtons.OK, MessageBoxIcon.Information);
                             });
+                            if (pluginCommands.Count == 0)
+                            {
+                                pluginCommands.Add("无");
+                            }
                             pluginInfos.Click += new EventHandler((sender, e) =>
                             {
                                 MessageBox.Show(
