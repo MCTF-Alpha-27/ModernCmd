@@ -73,16 +73,6 @@ namespace ModernCmd
                                 MessageBox.Show("已禁用此插件，重启后生效", "需要重启",
                                     MessageBoxButtons.OK, MessageBoxIcon.Information);
                             });
-                            // string pluginCommand;
-                            // if (type.GetInterface("ICommand") != null)
-                            // {
-                            //  ICommand command = Activator.CreateInstance(type) as ICommand;
-                            //  pluginCommand = command.CommandName;
-                            // }
-                            // else
-                            // {
-                            //  pluginCommand = "该插件没有提供命令";
-                            // }
                             pluginInfos.Click += new EventHandler((sender, e) =>
                             {
                                 MessageBox.Show(
@@ -177,7 +167,7 @@ namespace ModernCmd
             catch (Exception e)
             {
                 commandLogger.Text += "运行插件时发生错误\r\n";
-                commandLogger.Text += e.Message + "\r\n";
+                commandLogger.Text += $"{e.Message}\r\n{e.StackTrace}";
             }
             MessageBox.Show($"没有找到名为{cmd}的命令，请检查输入是否有误\n如果该命令是一个插件提供的，请检查插件是否成功启用", "命令未找到", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             return 1;

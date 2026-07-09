@@ -25,7 +25,7 @@ namespace ModernCmd
                 "软件名称：摩登命令行\n" +
                 "作者：摩登命令行开发组\n" +
                 "版本：v1.0.0\n" +
-                "\n此软件顾名思义，是更高级的命令行，支持载入插件", 
+                "\n一个基于Winform的GUI命令行，支持载入插件", 
                 "信息", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
