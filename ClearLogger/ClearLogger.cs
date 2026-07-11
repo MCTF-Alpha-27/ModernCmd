@@ -12,6 +12,7 @@ namespace ClearLogger
         public string Author => "摩登命令行开发组";
         public string Description => "提供了清空日志器的功能";
         public string CommandName => "cls";
+        public string CommandDescription => "键入cls以清空日志器";
 
         public void Main(ModernCmd.ModernCmd modernCmd)
         {
@@ -25,9 +26,9 @@ namespace ClearLogger
             modernCmd.FunctionsToolStripMenuItem.DropDownItems.Add(ClearLogger);
         }
 
-        public int Run(string[] args, TextBox CommandLogger)
+        public int Run(string[] args, TextBox commandLogger)
         {
-            CommandLogger.Text = "";
+            commandLogger.Text = "";
             return 0;
         }
     }

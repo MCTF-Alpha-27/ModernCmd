@@ -14,6 +14,7 @@ namespace ColorfulLogger
         public string Author => "摩登命令行开发组";
         public string Description => "增加了改变日志器颜色的功能，目前共有5种颜色可选";
         public string CommandName => "color";
+        public string CommandDescription => "键入color <颜色>以改变日志器颜色，如color green";
 
         public void Main(ModernCmd.ModernCmd modernCmd)
         {
@@ -122,13 +123,16 @@ namespace ColorfulLogger
             ColorfulLogger.DropDownItems.Add(ColorBlue);
         }
 
-        public int Run(string[] args, TextBox CommandLogger)
+        public int Run(string[] args, TextBox commandLogger)
         {
+            if (args.Length == 0)
+            {
+                return 0;
+            }
             string color = args[0];
-            if (color == "color") return 0;
             if (color == "white")
             {
-                CommandLogger.ForeColor = Color.White;
+                commandLogger.ForeColor = Color.White;
                 StreamWriter config = new StreamWriter("configs/ColorfulLogger.config");
                 config.WriteLine($"-*- {Name}插件的配置文件，用于保存上次设置的颜色数据 -*-");
                 config.WriteLine(color);
@@ -136,7 +140,7 @@ namespace ColorfulLogger
             }
             else if (color == "green")
             {
-                CommandLogger.ForeColor = Color.LightGreen;
+                commandLogger.ForeColor = Color.LightGreen;
                 StreamWriter config = new StreamWriter("configs/ColorfulLogger.config");
                 config.WriteLine($"-*- {Name}插件的配置文件，用于保存上次设置的颜色数据 -*-");
                 config.WriteLine(color);
@@ -144,7 +148,7 @@ namespace ColorfulLogger
             }
             else if (color == "red")
             {
-                CommandLogger.ForeColor = Color.Red;
+                commandLogger.ForeColor = Color.Red;
                 StreamWriter config = new StreamWriter("configs/ColorfulLogger.config");
                 config.WriteLine($"-*- {Name}插件的配置文件，用于保存上次设置的颜色数据 -*-");
                 config.WriteLine(color);
@@ -152,7 +156,7 @@ namespace ColorfulLogger
             }
             else if (color == "yellow")
             {
-                CommandLogger.ForeColor = Color.Yellow;
+                commandLogger.ForeColor = Color.Yellow;
                 StreamWriter config = new StreamWriter("configs/ColorfulLogger.config");
                 config.WriteLine($"-*- {Name}插件的配置文件，用于保存上次设置的颜色数据 -*-");
                 config.WriteLine(color);
@@ -160,7 +164,7 @@ namespace ColorfulLogger
             }
             else if (color == "blue")
             {
-                CommandLogger.ForeColor = Color.LightBlue;
+                commandLogger.ForeColor = Color.LightBlue;
                 StreamWriter config = new StreamWriter("configs/ColorfulLogger.config");
                 config.WriteLine($"-*- {Name}插件的配置文件，用于保存上次设置的颜色数据 -*-");
                 config.WriteLine(color);
@@ -168,7 +172,7 @@ namespace ColorfulLogger
             }
             else
             {
-                CommandLogger.Text += "目前没有该颜色\r\n";
+                commandLogger.Text += "目前没有该颜色\r\n";
                 return 1;
             }
             return 0;

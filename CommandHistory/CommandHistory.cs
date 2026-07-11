@@ -2,16 +2,15 @@
 using PluginFrame;
 using System.Windows.Forms;
 using System.Collections.Generic;
-using ModernCmd;
 
 namespace CommandHistory
 {
     public class CommandHistory : IPlugin
     {
         public string Name => "历史命令";
-        public string Version => "1.1.2";
+        public string Version => "1.2.0";
         public string Author => "摩登命令行开发组";
-        public string Description => "提供了快捷输入历史命令的按钮\n右键点击历史命令按钮来查看历史命令菜单";
+        public string Description => "提供了快捷输入历史命令的按钮\n右键点击历史命令按钮来查看历史命令菜单，左键点击清空历史命令";
 
         public void Main(ModernCmd.ModernCmd modernCmd)
         {
@@ -20,7 +19,7 @@ namespace CommandHistory
             modernCmd.RunCommand.Click += new EventHandler((s, e) =>
             {
                 string command = modernCmd.CommandInput.Text;
-                if (!commandHistories.Contains(command) & !string.IsNullOrEmpty(command) & !string.IsNullOrWhiteSpace(command))
+                if (!commandHistories.Contains(command) && !string.IsNullOrEmpty(command) && !string.IsNullOrWhiteSpace(command))
                 {
                     commandHistories.Add(command);
                     ToolStripMenuItem cmdHistory = new ToolStripMenuItem();
@@ -41,6 +40,13 @@ namespace CommandHistory
             commandHistory.Text = "历史命令";
             commandHistory.UseVisualStyleBackColor = true;
             commandHistory.ContextMenuStrip = menuStrip;
+            commandHistory.Click += new EventHandler((s, e) =>
+            {
+                if (MessageBox.Show("你确定要清空历史命令吗？", Name, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
+                {
+                    menuStrip.Items.Clear();
+                }
+            });
             modernCmd.Controls.Add(commandHistory);
         }
     }
